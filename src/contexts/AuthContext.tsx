@@ -11,6 +11,7 @@ export interface AuthContextData {
   authenticated: boolean;
   loading: boolean;
   logout(): void;
+  loadUser(): Promise<void>;
 }
 
 export const AuthContext = createContext<AuthContextData>({} as AuthContextData);

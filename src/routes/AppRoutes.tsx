@@ -2,10 +2,9 @@ import { Routes, Route } from "react-router-dom";
 
 import Register from "../pages/Register";
 import PaymentReturn from "../pages/PaymentReturn";
-import Login from "../pages/Login";
 
-// import Dashboard from "../pages/admin/Dashboard";
-import NotAuthenticated from "../pages/NotAuthenticated";
+import Login from "../pages/Login";
+import Dashboard from "../pages/Dashboard";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 
@@ -33,14 +32,9 @@ export default function AppRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route
           path="/admin/dashboard"
-          element={<Register />} //Alterar
+          element={<Dashboard />}
         />
       </Route>
-
-      <Route 
-        path="/not-authenticated"
-        element={<NotAuthenticated />}
-      />
 
     </Routes>
   );

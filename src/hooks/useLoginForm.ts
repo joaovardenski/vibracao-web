@@ -5,6 +5,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 import api from "../services/api";
+import { useAuth } from "./useAuth";
 
 import type {
   LoginForm,
@@ -20,6 +21,7 @@ const INITIAL: LoginForm = {
 
 export function useLoginForm() {
   const navigate = useNavigate();
+  const { loadUser } = useAuth();
 
   const [form, setForm] =
     useState<LoginForm>(INITIAL);
@@ -90,6 +92,8 @@ export function useLoginForm() {
             "access_token_vj2026",
             response.data.token
         );
+
+        await loadUser();
 
         navigate("/admin/dashboard");
 
