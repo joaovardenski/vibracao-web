@@ -1,6 +1,6 @@
 // utils/validators.ts
 
-import type { FormErrors, RegisterForm } from "../types";
+import type { FormErrors, RegisterForm, LoginErrors, LoginForm } from "../types";
 import { onlyDigits } from "./masks";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -85,6 +85,31 @@ export const validateRegisterForm = (data: RegisterForm): FormErrors => {
 
   if (data.emergency_contact && data.emergency_contact.length > 255) {
     errors.emergency_contact = "Contato de emergência muito grande.";
+  }
+
+  return errors;
+};
+
+export const validateLoginForm = (
+  data: LoginForm
+): LoginErrors => {
+  const errors: LoginErrors = {};
+
+  const email = data.email.trim();
+  const password = data.password;
+
+  if (!email) {
+    errors.email = "Informe o email.";
+  } else if (!EMAIL_REGEX.test(email)) {
+    errors.email = "Email inválido.";
+  } else if (email.length > 255) {
+    errors.email = "Email muito grande.";
+  }
+
+  if (!password) {
+    errors.password = "Informe a senha.";
+  } else if (password.length < 8) {
+    errors.password = "Senha inválida.";
   }
 
   return errors;

@@ -31,4 +31,10 @@ export interface RegistrationResponse {
   };
 }
 
+export interface LoginForm {
+  email: string;
+  password: string;
+}
+
 export type FormErrors = Partial<Record<keyof RegisterForm, string>>;
+export type LoginErrors = Partial<Record<keyof LoginForm, string>>;

@@ -2,7 +2,7 @@ import type { ChangeEvent, InputHTMLAttributes } from "react";
 
 type FormFieldProps = {
   id: string;
-  label: string;
+  label: React.ReactNode;
   value: string;
   error?: string;
   onChange: (value: string) => void;

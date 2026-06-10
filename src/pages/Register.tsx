@@ -1,4 +1,17 @@
 import { useState } from "react";
+import { 
+  User, 
+  IdCard, 
+  Phone, 
+  Mail, 
+  MapPin, 
+  Church, 
+  HeartHandshake, 
+  ArrowRight, 
+  ArrowLeft, 
+  Lock, 
+  QrCode 
+} from "lucide-react";
 import { maskCpf, maskPhone } from "../utils/masks";
 import FormField from "../components/FormField";
 import { useRegisterForm } from "../hooks/useRegisterForm";
@@ -22,12 +35,12 @@ export default function Register() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 flex flex-col items-center justify-center p-4 sm:p-6 md:p-10">
+    <div className="min-h-screen bg-linear-to-br from-indigo-50 via-purple-50 to-pink-50 flex flex-col items-center justify-center p-4 sm:p-6 md:p-10">
       {/* Container Principal */}
       <div className="w-full max-w-xl overflow-hidden rounded-3xl border border-purple-100/80 bg-white/90 backdrop-blur-md shadow-2xl transition-all duration-300">
         {/* Header Dinâmico e Vibrante */}
-        <div className="relative overflow-hidden bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-6 py-8 text-center text-white">
-          <div className="absolute top-0 left-0 h-full w-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]" />
+        <div className="relative overflow-hidden bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 px-6 py-8 text-center text-white">
+          <div className="absolute top-0 left-0 h-full w-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[16px_16px]" />
 
           {/* LOGO DA DIOCESE AQUI */}
           <div className="flex justify-center mb-4">
@@ -81,7 +94,11 @@ export default function Register() {
 
                 <FormField
                   id="full_name"
-                  label="Nome completo"
+                  label={
+                    <span className="flex items-center gap-2">
+                      <User size={16} className="text-indigo-500" /> Nome completo
+                    </span>
+                  }
                   value={form.full_name}
                   error={errors.full_name}
                   placeholder="Digite seu nome completo"
@@ -92,7 +109,11 @@ export default function Register() {
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <FormField
                     id="cpf"
-                    label="CPF"
+                    label={
+                      <span className="flex items-center gap-2">
+                        <IdCard size={16} className="text-indigo-500" /> CPF
+                      </span>
+                    }
                     value={form.cpf}
                     error={errors.cpf}
                     placeholder="000.000.000-00"
@@ -102,7 +123,11 @@ export default function Register() {
 
                   <FormField
                     id="phone"
-                    label="Telefone / WhatsApp"
+                    label={
+                      <span className="flex items-center gap-2">
+                        <Phone size={16} className="text-indigo-500" /> Telefone / WhatsApp
+                      </span>
+                    }
                     value={form.phone}
                     error={errors.phone}
                     placeholder="(00) 00000-0000"
@@ -113,7 +138,11 @@ export default function Register() {
 
                 <FormField
                   id="email"
-                  label="E-mail"
+                  label={
+                    <span className="flex items-center gap-2">
+                      <Mail size={16} className="text-indigo-500" /> E-mail
+                    </span>
+                  }
                   type="email"
                   value={form.email}
                   error={errors.email}
@@ -130,7 +159,7 @@ export default function Register() {
                   disabled={!canGoToStep2()}
                   className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-6 py-4 text-base font-bold text-white shadow-lg shadow-indigo-100 transition-all duration-200 hover:bg-indigo-700 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
                 >
-                  Continuar inscrição →
+                  Continuar inscrição <ArrowRight size={18} />
                 </button>
               </div>
             )}
@@ -145,16 +174,20 @@ export default function Register() {
                   <button
                     type="button"
                     onClick={() => setStep(1)}
-                    className="text-xs font-semibold text-gray-500 hover:text-indigo-600 transition"
+                    className="flex items-center gap-1 text-xs font-semibold text-gray-500 hover:text-indigo-600 transition"
                   >
-                    ← Voltar ao passo 1
+                    <ArrowLeft size={14} /> Voltar ao passo 1
                   </button>
                 </div>
 
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <FormField
                     id="city"
-                    label="Cidade"
+                    label={
+                      <span className="flex items-center gap-2">
+                        <MapPin size={16} className="text-indigo-500" /> Cidade
+                      </span>
+                    }
                     value={form.city}
                     error={errors.city}
                     placeholder="Ex: União da Vitória"
@@ -163,7 +196,11 @@ export default function Register() {
 
                   <FormField
                     id="parish"
-                    label="Paróquia / Comunidade"
+                    label={
+                      <span className="flex items-center gap-2">
+                        <Church size={16} className="text-indigo-500" /> Paróquia / Comunidade
+                      </span>
+                    }
                     value={form.parish}
                     error={errors.parish}
                     placeholder="Ex: Nossa Senhora de Fátima"
@@ -173,7 +210,11 @@ export default function Register() {
 
                 <FormField
                   id="emergency_contact"
-                  label="Contato de emergência (Opcional)"
+                  label={
+                    <span className="flex items-center gap-2">
+                      <HeartHandshake size={16} className="text-indigo-500" /> Contato de emergência (Opcional)
+                    </span>
+                  }
                   value={form.emergency_contact ?? ""}
                   error={errors.emergency_contact}
                   placeholder="Nome do responsável e telefone"
@@ -184,7 +225,7 @@ export default function Register() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 px-6 py-4 text-base font-black text-white shadow-xl shadow-indigo-200 transition-all duration-150 hover:from-indigo-700 hover:to-purple-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-linear-to-r from-indigo-600 to-purple-600 px-6 py-4 text-base font-black text-white shadow-xl shadow-indigo-200 transition-all duration-150 hover:from-indigo-700 hover:to-purple-700 active:scale-[0.99] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {loading ? (
                     <>
@@ -210,7 +251,9 @@ export default function Register() {
                       <span>Processando Vaga...</span>
                     </>
                   ) : (
-                    "Confirmar e Ir para o Pagamento ⚡"
+                    <>
+                      Confirmar e Ir para o Pagamento ⚡
+                    </>
                   )}
                 </button>
               </div>
@@ -218,9 +261,13 @@ export default function Register() {
 
             {/* Rodapé de Confiança / Segurança */}
             <div className="mt-2 flex items-center justify-center gap-4 text-center text-xs text-gray-400">
-              <span className="flex items-center gap-1">🔒 Conexão Segura</span>
+              <span className="flex items-center gap-1">
+                <Lock size={12} className="text-emerald-500" /> Conexão Segura
+              </span>
               <span>•</span>
-              <span className="flex items-center gap-1">💳 Pix</span>
+              <span className="flex items-center gap-1">
+                <QrCode size={12} className="text-indigo-400" /> Pix
+              </span>
             </div>
           </form>
         </div>
