@@ -38,3 +38,9 @@ export interface LoginForm {
 
 export type FormErrors = Partial<Record<keyof RegisterForm, string>>;
 export type LoginErrors = Partial<Record<keyof LoginForm, string>>;
+
+export interface Admin {
+  id: string;
+  name: string;
+  email: string;
+}
