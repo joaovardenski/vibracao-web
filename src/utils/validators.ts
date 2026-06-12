@@ -5,6 +5,8 @@ import type {
   RegisterForm,
   LoginErrors,
   LoginForm,
+  ManualRegistrationErrors,
+  ManualRegistrationForm,
 } from "../types";
 import { onlyDigits } from "./masks";
 
@@ -113,6 +115,57 @@ export const validateLoginForm = (data: LoginForm): LoginErrors => {
     errors.password = "Informe a senha.";
   } else if (password.length < 8) {
     errors.password = "Senha inválida.";
+  }
+
+  return errors;
+};
+
+export const validateManualRegistrationForm = (
+  data: ManualRegistrationForm,
+): ManualRegistrationErrors => {
+  const errors: ManualRegistrationErrors = {};
+
+  const fullName = data.full_name.trim();
+  const email = data.email.trim();
+  const city = data.city.trim();
+  const parish = data.parish.trim();
+
+  if (!fullName) {
+    errors.full_name = "Informe o nome completo.";
+  } else if (fullName.length < 5) {
+    errors.full_name = "O nome deve ter ao menos 5 caracteres.";
+  }
+
+  if (!data.cpf) {
+    errors.cpf = "Informe o CPF.";
+  } else if (!validateCpf(data.cpf)) {
+    errors.cpf = "CPF inválido.";
+  }
+
+  if (!email) {
+    errors.email = "Informe o e-mail.";
+  } else if (!EMAIL_REGEX.test(email)) {
+    errors.email = "E-mail inválido.";
+  }
+
+  const phone = onlyDigits(data.phone);
+
+  if (!phone) {
+    errors.phone = "Informe o telefone.";
+  } else if (!/^\d{10,11}$/.test(phone)) {
+    errors.phone = "Telefone inválido.";
+  }
+
+  if (!city) {
+    errors.city = "Informe a cidade.";
+  }
+
+  if (!parish) {
+    errors.parish = "Informe a paróquia.";
+  }
+
+  if (data.emergency_contact && data.emergency_contact.length > 255) {
+    errors.emergency_contact = "Contato de emergência muito grande.";
   }
 
   return errors;

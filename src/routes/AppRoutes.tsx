@@ -8,6 +8,7 @@ import Dashboard from "../pages/Dashboard";
 
 import ProtectedRoute from "../components/ProtectedRoute";
 import Participants from "../pages/Participants";
+import Admins from "../pages/Admins";
 
 export default function AppRoutes() {
   return (
@@ -23,6 +24,7 @@ export default function AppRoutes() {
       <Route element={<ProtectedRoute />}>
         <Route path="/admin/dashboard" element={<Dashboard />} />
         <Route path="/admin/participantes" element={<Participants />} />
+        <Route path="/admin/administradores" element={<Admins />} />
       </Route>
     </Routes>
   );
