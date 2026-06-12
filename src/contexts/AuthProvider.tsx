@@ -1,7 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
 import { AuthContext } from "./AuthContext";
 import api from "../services/api";
-import type { Admin } from "../types";
+
+interface Admin {
+  id: string;
+  name: string;
+  email: string;
+}
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [admin, setAdmin] = useState<Admin | null>(null);
