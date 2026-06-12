@@ -3,21 +3,13 @@ import logoDioceseUV from "../assets/dioceseUV.png";
 import { useLoginForm } from "../hooks/useLoginForm";
 
 export default function Login() {
-  const {
-    form,
-    errors,
-    loading,
-    serverError,
-    updateField,
-    handleSubmit,
-  } = useLoginForm();
+  const { form, errors, loading, serverError, updateField, handleSubmit } =
+    useLoginForm();
 
   return (
     <div className="min-h-screen bg-linear-to-br from-indigo-50 via-purple-50 to-pink-50 flex flex-col items-center justify-start sm:justify-center p-4 sm:p-6 md:p-10 overflow-y-auto">
-      
       {/* Container Principal */}
       <div className="w-full max-w-md rounded-3xl border border-purple-100/80 bg-white/90 backdrop-blur-md shadow-2xl transition-all duration-300 my-auto">
-        
         {/* Header Dinâmico */}
         <div className="relative overflow-hidden rounded-t-3xl bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600 px-6 py-8 text-center text-white">
           <div className="absolute top-0 left-0 h-full w-full opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] bg-size-[16px_16px]" />
@@ -46,7 +38,6 @@ export default function Login() {
 
         {/* Corpo do Formulário */}
         <div className="p-6 sm:p-8">
-          
           {/* Alerta de Erro do Servidor */}
           {serverError && (
             <div className="mb-5 flex items-start gap-3 rounded-xl border border-red-200 bg-red-50/80 p-4 text-sm text-red-700 animate-in fade-in slide-in-from-top-1 duration-200">

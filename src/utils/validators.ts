@@ -1,6 +1,11 @@
 // utils/validators.ts
 
-import type { FormErrors, RegisterForm, LoginErrors, LoginForm } from "../types";
+import type {
+  FormErrors,
+  RegisterForm,
+  LoginErrors,
+  LoginForm,
+} from "../types";
 import { onlyDigits } from "./masks";
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -90,9 +95,7 @@ export const validateRegisterForm = (data: RegisterForm): FormErrors => {
   return errors;
 };
 
-export const validateLoginForm = (
-  data: LoginForm
-): LoginErrors => {
+export const validateLoginForm = (data: LoginForm): LoginErrors => {
   const errors: LoginErrors = {};
 
   const email = data.email.trim();

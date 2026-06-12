@@ -7,10 +7,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../services/api";
 import { useAuth } from "./useAuth";
 
-import type {
-  LoginForm,
-  LoginErrors,
-} from "../types";
+import type { LoginForm, LoginErrors } from "../types";
 
 import { validateLoginForm } from "../utils/validators";
 
@@ -23,22 +20,15 @@ export function useLoginForm() {
   const navigate = useNavigate();
   const { loadUser } = useAuth();
 
-  const [form, setForm] =
-    useState<LoginForm>(INITIAL);
+  const [form, setForm] = useState<LoginForm>(INITIAL);
 
-  const [errors, setErrors] =
-    useState<LoginErrors>({});
+  const [errors, setErrors] = useState<LoginErrors>({});
 
-  const [loading, setLoading] =
-    useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const [serverError, setServerError] =
-    useState<string | null>(null);
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const updateField = (
-    field: keyof LoginForm,
-    value: string
-  ) => {
+  const updateField = (field: keyof LoginForm, value: string) => {
     setForm((prev) => ({
       ...prev,
       [field]: value,
@@ -50,30 +40,22 @@ export function useLoginForm() {
     }));
   };
 
-  const handleSubmit = async (
-    e: React.FormEvent
-  ) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     setServerError(null);
 
-    const validationErrors =
-      validateLoginForm(form);
+    const validationErrors = validateLoginForm(form);
 
-    if (
-      Object.keys(validationErrors).length > 0
-    ) {
+    if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
 
-      const firstError =
-        Object.keys(validationErrors)[0];
+      const firstError = Object.keys(validationErrors)[0];
 
-      document
-        .getElementById(firstError)
-        ?.scrollIntoView({
-          behavior: "smooth",
-          block: "center",
-        });
+      document.getElementById(firstError)?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
 
       return;
     }
@@ -81,38 +63,26 @@ export function useLoginForm() {
     setLoading(true);
 
     try {
-        const response = await api.post(
-            "/login",
-            form
+      const response = await api.post("/login", form);
+
+      console.log(response.data);
+
+      localStorage.setItem("access_token_vj2026", response.data.token);
+
+      await loadUser();
+
+      navigate("/admin/dashboard");
+    } catch (err) {
+      console.error(err);
+
+      if (axios.isAxiosError(err)) {
+        setServerError(
+          err.response?.data?.message ?? "Falha ao realizar login.",
         );
-
-        console.log(response.data);
-
-        localStorage.setItem(
-            "access_token_vj2026",
-            response.data.token
-        );
-
-        await loadUser();
-
-        navigate("/admin/dashboard");
-
-        } catch (err) {
-        console.error(err);
-
-        if (axios.isAxiosError(err)) {
-            setServerError(
-            err.response?.data?.message ??
-            "Falha ao realizar login."
-            );
-        } else {
-            setServerError(
-            err instanceof Error
-                ? err.message
-                : "Erro inesperado."
-            );
-        }
-        } finally {
+      } else {
+        setServerError(err instanceof Error ? err.message : "Erro inesperado.");
+      }
+    } finally {
       setLoading(false);
     }
   };

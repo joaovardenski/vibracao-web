@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { 
-  User, 
-  IdCard, 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Church, 
-  HeartHandshake, 
-  ArrowRight, 
-  ArrowLeft, 
-  Lock, 
-  QrCode 
+import {
+  User,
+  IdCard,
+  Phone,
+  Mail,
+  MapPin,
+  Church,
+  HeartHandshake,
+  ArrowRight,
+  ArrowLeft,
+  Lock,
+  QrCode,
 } from "lucide-react";
 import { maskCpf, maskPhone } from "../utils/masks";
 import FormField from "../components/FormField";
@@ -44,10 +44,10 @@ export default function Register() {
 
           {/* LOGO DA DIOCESE AQUI */}
           <div className="flex justify-center mb-4">
-            <img 
+            <img
               src={logoDioceseUV}
-              alt="Diocese de União da Vitória" 
-              className="h-14 w-auto object-contain opacity-90" 
+              alt="Diocese de União da Vitória"
+              className="h-14 w-auto object-contain opacity-90"
             />
           </div>
 
@@ -96,7 +96,8 @@ export default function Register() {
                   id="full_name"
                   label={
                     <span className="flex items-center gap-2">
-                      <User size={16} className="text-indigo-500" /> Nome completo
+                      <User size={16} className="text-indigo-500" /> Nome
+                      completo
                     </span>
                   }
                   value={form.full_name}
@@ -125,7 +126,8 @@ export default function Register() {
                     id="phone"
                     label={
                       <span className="flex items-center gap-2">
-                        <Phone size={16} className="text-indigo-500" /> Telefone / WhatsApp
+                        <Phone size={16} className="text-indigo-500" /> Telefone
+                        / WhatsApp
                       </span>
                     }
                     value={form.phone}
@@ -198,7 +200,8 @@ export default function Register() {
                     id="parish"
                     label={
                       <span className="flex items-center gap-2">
-                        <Church size={16} className="text-indigo-500" /> Paróquia / Comunidade
+                        <Church size={16} className="text-indigo-500" />{" "}
+                        Paróquia / Comunidade
                       </span>
                     }
                     value={form.parish}
@@ -212,7 +215,8 @@ export default function Register() {
                   id="emergency_contact"
                   label={
                     <span className="flex items-center gap-2">
-                      <HeartHandshake size={16} className="text-indigo-500" /> Contato de emergência (Opcional)
+                      <HeartHandshake size={16} className="text-indigo-500" />{" "}
+                      Contato de emergência (Opcional)
                     </span>
                   }
                   value={form.emergency_contact ?? ""}
@@ -251,9 +255,7 @@ export default function Register() {
                       <span>Processando Vaga...</span>
                     </>
                   ) : (
-                    <>
-                      Confirmar e Ir para o Pagamento ⚡
-                    </>
+                    <>Confirmar e Ir para o Pagamento ⚡</>
                   )}
                 </button>
               </div>
