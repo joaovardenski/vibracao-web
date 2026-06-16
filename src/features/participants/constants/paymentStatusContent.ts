@@ -13,7 +13,7 @@ export const paymentStatusContent = {
   },
   pending: {
     title: "Pagamento em Análise",
-    message: "Estamos aguardando a confirmação do banco. Isso pode levar alguns instantes.",
+    message: "Estamos aguardando a confirmação do banco. Isso pode levar alguns instantes. Caso não tenha feito o pagamento, tente novamente.",
     icon: Clock3,
     iconClass: "text-amber-500 bg-amber-50 animate-pulse",
     buttonClass: "bg-amber-500 hover:bg-amber-600 focus:ring-amber-400",

@@ -65,6 +65,14 @@ export function useRegisterForm() {
         data: RegistrationResponse;
       }>("/registrations", payload);
 
+      const orderId = data.data.order.id;
+
+      if (orderId) {
+        const paymentUrl = `/payment?external_reference=${orderId}`;
+        
+        window.history.pushState(null, "", paymentUrl);
+      }
+
       window.location.href = data.data.preference.init_point;
     } catch (err) {
       if (axios.isAxiosError(err)) {

@@ -10,9 +10,10 @@ interface PaymentSummaryProps {
       amount: number;
     };
   };
+  status: "approved" | "pending" | "failure";
 }
 
-export default function PaymentSummary({ details }: PaymentSummaryProps) {
+export default function PaymentSummary({ details, status }: PaymentSummaryProps) {
   const formatCurrency = (value: number) => {
     return value.toLocaleString("pt-BR", {
       style: "currency",
@@ -64,7 +65,7 @@ export default function PaymentSummary({ details }: PaymentSummaryProps) {
         <div className="h-px w-full border-t border-dashed border-gray-200 my-1" />
 
         <div className="flex justify-between items-center pt-1">
-          <span className="font-bold text-gray-900">Total pago</span>
+          <span className="font-bold text-gray-900">{status === "approved" ? "Total pago" : "Valor da transação"}</span>
           <span className="text-lg font-black text-gray-900">
             {formatCurrency(details.ticket.amount)}
           </span>

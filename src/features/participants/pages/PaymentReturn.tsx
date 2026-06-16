@@ -45,7 +45,7 @@ export default function PaymentReturn() {
             </p>
           </div>
 
-          {showSummary && <PaymentSummary details={details} />}
+          {showSummary && <PaymentSummary details={details} status={status} />}
         </div>
 
         {/* Grupo de Botões de Ação */}
