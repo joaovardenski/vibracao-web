@@ -8,6 +8,7 @@ import {
   Phone,
 } from "lucide-react";
 import type { Registration } from "../types/adminTypes";
+import { formatDateTime } from "../../../shared/utils/format";
 
 interface ParticipantDrawerProps {
   registration: Registration | null;
@@ -107,10 +108,10 @@ export default function ParticipantDrawer({ registration, onClose }: Participant
               </div>
             </div>
 
-            <div className="space-y-3 pt-3 border-t border-slate-100 text-xs text-gray-400 flex items-center justify-between">
+            <div className="pt-3 border-t border-slate-100 text-xs text-gray-400 flex items-center justify-between">
               <span className="flex items-center gap-1">
                 <Calendar size={14} />
-                Inscrito em: {registration.created_at}
+                Inscrito em: {formatDateTime(registration.created_at)}
               </span>
               <span className="font-bold text-gray-700">
                 Valor Pago: {formattedAmount}
