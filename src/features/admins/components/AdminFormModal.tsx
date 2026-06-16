@@ -2,6 +2,7 @@ import { useState } from "react";
 import { X, User, Mail, Key, Loader2 } from "lucide-react";
 import { isAxiosError } from "axios";
 import api from "../../../services/api";
+import FormField from "../../../shared/components/FormField";
 import type { AdminUser } from "../hooks/useAdmins";
 
 interface AdminFormModalProps {
@@ -69,61 +70,60 @@ export default function AdminFormModal({ isOpen, adminToEdit, onClose, onSuccess
           </div>
 
           <form onSubmit={handleSubmit} className="p-5 space-y-4">
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold text-gray-400 uppercase flex items-center gap-1">
-                <User size={12} /> Nome
-              </label>
-              <input
-                type="text"
-                required
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-xs font-medium outline-none transition focus:border-indigo-500"
-                placeholder="Nome completo do admin"
-              />
-            </div>
+            <FormField
+              id="name"
+              required
+              label={
+                <>
+                  <User size={16} className="text-indigo-500" /> Nome
+                </>
+              }
+              value={form.name}
+              placeholder="Nome completo do admin"
+              onChange={(value) => setForm({ ...form, name: value })}
+            />
 
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold text-gray-400 uppercase flex items-center gap-1">
-                <Mail size={12} /> E-mail
-              </label>
-              <input
-                type="email"
-                required
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-xs font-medium outline-none transition focus:border-indigo-500"
-                placeholder="exemplo@email.com"
-              />
-            </div>
+            <FormField
+              id="email"
+              type="email"
+              required
+              label={
+                <>
+                  <Mail size={16} className="text-indigo-500" /> E-mail
+                </>
+              }
+              value={form.email}
+              placeholder="exemplo@email.com"
+              onChange={(value) => setForm({ ...form, email: value })}
+            />
 
-            <div className="space-y-1">
-              <label className="text-[11px] font-bold text-gray-400 uppercase flex items-center gap-1">
-                <Key size={12} /> Senha
-              </label>
-              <input
-                type="password"
-                required={!adminToEdit}
-                value={form.password}
-                onChange={(e) => setForm({ ...form, password: e.target.value })}
-                className="w-full rounded-xl border border-gray-200 px-3 py-2.5 text-xs font-medium outline-none transition focus:border-indigo-500"
-                placeholder={adminToEdit ? "Deixe em branco para não alterar" : "Mínimo 8 caracteres"}
-              />
-            </div>
+            <FormField
+              id="password"
+              type="password"
+              required={!adminToEdit}
+              label={
+                <>
+                  <Key size={16} className="text-indigo-500" /> Senha
+                </>
+              }
+              value={form.password}
+              placeholder={adminToEdit ? "Deixe em branco para não alterar" : "Mínimo 8 caracteres"}
+              onChange={(value) => setForm({ ...form, password: value })}
+            />
 
             <div className="flex gap-2 pt-2">
               <button
                 type="button"
                 onClick={onClose}
                 disabled={submitLoading}
-                className="flex-1 py-2.5 border border-gray-200 text-xs font-bold text-gray-500 rounded-xl hover:bg-slate-50 transition cursor-pointer"
+                className="flex-1 py-3 border border-gray-200 text-xs font-bold text-gray-500 rounded-xl hover:bg-slate-50 transition cursor-pointer"
               >
                 Cancelar
               </button>
               <button
                 type="submit"
                 disabled={submitLoading}
-                className="flex-1 py-2.5 bg-indigo-600 text-xs font-bold text-white rounded-xl hover:bg-indigo-700 transition flex items-center justify-center gap-1.5 cursor-pointer"
+                className="flex-1 py-3 bg-indigo-600 text-xs font-bold text-white rounded-xl hover:bg-indigo-700 transition flex items-center justify-center gap-1.5 cursor-pointer"
               >
                 {submitLoading ? <Loader2 size={14} className="animate-spin" /> : "Salvar Alterações"}
               </button>

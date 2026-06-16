@@ -1,5 +1,5 @@
 import { MapPin, Church, HeartHandshake, ArrowLeft } from "lucide-react";
-import FormField from "../components/FormField";
+import FormField from "../../../shared/components/FormField";
 import LoadingSpinner from "../../../shared/components/LoadingSpiner";
 import type {RegisterForm, FormErrors} from "../types/participantsTypes";
 

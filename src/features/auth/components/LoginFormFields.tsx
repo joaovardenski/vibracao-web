@@ -1,5 +1,6 @@
 import { Mail, Lock, ArrowRight } from "lucide-react";
 import LoadingSpinner from "../../../shared/components/LoadingSpiner";
+import FormField from "../../../shared/components/FormField";
 
 interface LoginFormFieldsProps {
   form: {
@@ -15,65 +16,38 @@ interface LoginFormFieldsProps {
 }
 
 export default function LoginFormFields({ form, errors, loading, updateField }: LoginFormFieldsProps) {
-  const baseInputStyle = "w-full rounded-xl border bg-gray-50/50 pl-11 pr-4 py-3.5 text-sm font-medium text-gray-800 outline-none transition-all duration-200 placeholder:text-gray-400/80";
-  const errorInputStyle = "border-red-300 bg-red-50/10 focus:border-red-500 focus:ring-4 focus:ring-red-100";
-  const normalInputStyle = "border-gray-200 focus:border-indigo-500 focus:bg-white focus:ring-4 focus:ring-indigo-100";
-
   return (
-    <>
-      {/* Campo: Email */}
-      <div className="group">
-        <label htmlFor="email" className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-500 transition-colors group-focus-within:text-indigo-600">
-          E-mail
-        </label>
-        <div className="relative flex items-center">
-          <span className="absolute left-4 text-gray-400 transition-colors group-focus-within:text-indigo-500">
-            <Mail size={18} />
-          </span>
-          <input
-            id="email"
-            type="email"
-            autoComplete="email"
-            value={form.email}
-            onChange={(e) => updateField("email", e.target.value)}
-            placeholder="exemplo@email.com"
-            className={`${baseInputStyle} ${errors.email ? errorInputStyle : normalInputStyle}`}
-          />
-        </div>
-        {errors.email && (
-          <p className="mt-1.5 text-xs font-semibold text-red-600 flex items-center gap-1">
-            <span>•</span> {errors.email}
-          </p>
-        )}
-      </div>
+    <div className="flex flex-col gap-5">
+      <FormField
+        id="email"
+        type="email"
+        autoComplete="email"
+        label={
+          <>
+            <Mail size={16} className="text-indigo-500" /> E-mail
+          </>
+        }
+        value={form.email}
+        error={errors.email}
+        placeholder="exemplo@email.com"
+        onChange={(value) => updateField("email", value)}
+      />
 
-      {/* Campo: Senha */}
-      <div className="group">
-        <label htmlFor="password" className="mb-1.5 block text-xs font-bold uppercase tracking-wider text-gray-500 transition-colors group-focus-within:text-indigo-600">
-          Senha
-        </label>
-        <div className="relative flex items-center">
-          <span className="absolute left-4 text-gray-400 transition-colors group-focus-within:text-indigo-500">
-            <Lock size={18} />
-          </span>
-          <input
-            id="password"
-            type="password"
-            autoComplete="current-password"
-            value={form.password}
-            onChange={(e) => updateField("password", e.target.value)}
-            placeholder="••••••••"
-            className={`${baseInputStyle} ${errors.password ? errorInputStyle : normalInputStyle}`}
-          />
-        </div>
-        {errors.password && (
-          <p className="mt-1.5 text-xs font-semibold text-red-600 flex items-center gap-1">
-            <span>•</span> {errors.password}
-          </p>
-        )}
-      </div>
+      <FormField
+        id="password"
+        type="password"
+        autoComplete="current-password"
+        label={
+          <>
+            <Lock size={16} className="text-indigo-500" /> Senha
+          </>
+        }
+        value={form.password}
+        error={errors.password}
+        placeholder="••••••••"
+        onChange={(value) => updateField("password", value)}
+      />
 
-      {/* Botão de Envio */}
       <button
         type="submit"
         disabled={loading}
@@ -90,6 +64,6 @@ export default function LoginFormFields({ form, errors, loading, updateField }: 
           </>
         )}
       </button>
-    </>
+    </div>
   );
 }

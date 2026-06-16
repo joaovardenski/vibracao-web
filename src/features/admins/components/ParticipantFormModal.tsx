@@ -1,16 +1,10 @@
 import { useState } from "react";
-import {
-  X,
-  User,
-  ShieldAlert,
-  Smartphone,
-  Mail,
-  MapPin,
-  Loader2,
-} from "lucide-react";
+import { X, User, ShieldAlert, Smartphone, Mail, MapPin, Loader2 } from "lucide-react";
 import { isAxiosError } from "axios";
 import api from "../../../services/api";
+import { maskCpf, maskPhone } from "../../../shared/masks/sharedMasks";
 import { validateManualRegistrationForm } from "../../../shared/validators/sharedValidators";
+import FormField from "../../../shared/components/FormField";
 import type { ManualRegistrationErrors } from "../types/adminTypes";
 
 interface ParticipantFormModalProps {
@@ -131,134 +125,107 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
               </div>
             )}
 
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                <User size={13} className="text-gray-400" /> Nome Completo
-              </label>
-              <input
-                type="text"
-                value={form.full_name}
-                onChange={(e) => handleFieldChange("full_name", e.target.value)}
-                className={`w-full rounded-xl bg-white px-4 py-3 text-sm font-medium outline-none transition focus:ring-4 placeholder:text-gray-400 ${
-                  errors.full_name
-                    ? "border border-red-300 focus:border-red-500 focus:ring-red-100"
-                    : "border border-gray-200 focus:border-indigo-500 focus:ring-indigo-100"
-                }`}
-                placeholder="Ex: João da Silva Sauro"
-              />
-              {errors.full_name && <p className="text-xs text-red-500 mt-1">{errors.full_name}</p>}
-            </div>
+            <FormField
+              id="full_name"
+              label={
+                <>
+                  <User size={16} className="text-indigo-500" /> Nome Completo
+                </>
+              }
+              value={form.full_name}
+              error={errors.full_name}
+              placeholder="Ex: João da Silva Sauro"
+              onChange={(value) => handleFieldChange("full_name", value)}
+            />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <User size={13} className="text-gray-400" /> CPF
-                </label>
-                <input
-                  type="text"
-                  value={form.cpf}
-                  onChange={(e) => handleFieldChange("cpf", e.target.value)}
-                  className={`w-full rounded-xl bg-white px-4 py-3 text-sm font-medium outline-none transition focus:ring-4 ${
-                    errors.cpf
-                      ? "border border-red-300 focus:border-red-500 focus:ring-red-100"
-                      : "border border-gray-200 focus:border-indigo-500 focus:ring-indigo-100"
-                  }`}
-                />
-                {errors.cpf && <p className="text-xs text-red-500 mt-1">{errors.cpf}</p>}
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <Smartphone size={13} className="text-gray-400" /> Celular / WhatsApp
-                </label>
-                <input
-                  type="tel"
-                  value={form.phone}
-                  onChange={(e) => handleFieldChange("phone", e.target.value)}
-                  className={`w-full rounded-xl bg-white px-4 py-3 text-sm font-medium outline-none transition focus:ring-4 placeholder:text-gray-400 ${
-                    errors.phone
-                      ? "border border-red-300 focus:border-red-500 focus:ring-red-100"
-                      : "border border-gray-200 focus:border-indigo-500 focus:ring-indigo-100"
-                  }`}
-                  placeholder="(00) 00000-0000"
-                />
-                {errors.phone && <p className="text-xs text-red-500 mt-1">{errors.phone}</p>}
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                <Mail size={13} className="text-gray-400" /> Endereço de E-mail
-              </label>
-              <input
-                type="email"
-                value={form.email}
-                onChange={(e) => handleFieldChange("email", e.target.value)}
-                className={`w-full rounded-xl bg-white px-4 py-3 text-sm font-medium outline-none transition focus:ring-4 placeholder:text-gray-400 ${
-                  errors.email
-                    ? "border border-red-300 focus:border-red-500 focus:ring-red-100"
-                    : "border border-gray-200 focus:border-indigo-500 focus:ring-indigo-100"
-                }`}
-                placeholder="nome@exemplo.com"
+              <FormField
+                id="cpf"
+                inputMode="numeric"
+                label={
+                  <>
+                    <User size={16} className="text-indigo-500" /> CPF
+                  </>
+                }
+                value={form.cpf}
+                error={errors.cpf}
+                placeholder="000.000.000-00"
+                onChange={(value) => handleFieldChange("cpf", maskCpf(value))}
               />
-              {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+
+              <FormField
+                id="phone"
+                type="tel"
+                inputMode="numeric"
+                label={
+                  <>
+                    <Smartphone size={16} className="text-indigo-500" /> Celular / WhatsApp
+                  </>
+                }
+                value={form.phone}
+                error={errors.phone}
+                placeholder="(00) 00000-0000"
+                onChange={(value) => handleFieldChange("phone", maskPhone(value))}
+              />
             </div>
+
+            <FormField
+              id="email"
+              type="email"
+              inputMode="email"
+              label={
+                <>
+                  <Mail size={16} className="text-indigo-500" /> Endereço de E-mail
+                </>
+              }
+              value={form.email}
+              error={errors.email}
+              placeholder="nome@exemplo.com"
+              onChange={(value) => handleFieldChange("email", value)}
+            />
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPin size={13} className="text-gray-400" /> Cidade
-                </label>
-                <input
-                  type="text"
-                  value={form.city}
-                  onChange={(e) => handleFieldChange("city", e.target.value)}
-                  className={`w-full rounded-xl bg-white px-4 py-3 text-sm font-medium outline-none transition focus:ring-4 placeholder:text-gray-400 ${
-                    errors.city
-                      ? "border border-red-300 focus:border-red-500 focus:ring-red-100"
-                      : "border border-gray-200 focus:border-indigo-500 focus:ring-indigo-100"
-                  }`}
-                  placeholder="Sua cidade"
-                />
-                {errors.city && <p className="text-xs text-red-500 mt-1">{errors.city}</p>}
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-xs font-bold text-gray-500 uppercase tracking-wider flex items-center gap-1.5">
-                  <MapPin size={13} className="text-gray-400" /> Paróquia / Comunidade
-                </label>
-                <input
-                  type="text"
-                  value={form.parish}
-                  onChange={(e) => handleFieldChange("parish", e.target.value)}
-                  className={`w-full rounded-xl bg-white px-4 py-3 text-sm font-medium outline-none transition focus:ring-4 placeholder:text-gray-400 ${
-                    errors.parish
-                      ? "border border-red-300 focus:border-red-500 focus:ring-red-100"
-                      : "border border-gray-200 focus:border-indigo-500 focus:ring-indigo-100"
-                  }`}
-                  placeholder="Nome da Paróquia"
-                />
-                {errors.parish && <p className="text-xs text-red-500 mt-1">{errors.parish}</p>}
-              </div>
-            </div>
-
-            <div className="space-y-1.5">
-              <label className="text-xs font-bold text-red-500 uppercase tracking-wider flex items-center gap-1.5">
-                <ShieldAlert size={13} className="text-red-400" /> Contato de Emergência (Opcional)
-              </label>
-              <textarea
-                value={form.emergency_contact}
-                onChange={(e) => handleFieldChange("emergency_contact", e.target.value)}
-                className={`w-full rounded-xl bg-white px-4 py-3 text-sm font-medium outline-none transition focus:ring-4 placeholder:text-gray-400 resize-none ${
-                  errors.emergency_contact
-                    ? "border border-red-300 focus:border-red-500 focus:ring-red-100"
-                    : "border border-gray-200 focus:border-indigo-500 focus:ring-indigo-100"
-                }`}
-                placeholder="Nome do contato + Telefone"
-                rows={2}
+              <FormField
+                id="city"
+                label={
+                  <>
+                    <MapPin size={16} className="text-indigo-500" /> Cidade
+                  </>
+                }
+                value={form.city}
+                error={errors.city}
+                placeholder="Sua cidade"
+                onChange={(value) => handleFieldChange("city", value)}
               />
-              {errors.emergency_contact && <p className="text-xs text-red-500 mt-1">{errors.emergency_contact}</p>}
+
+              <FormField
+                id="parish"
+                label={
+                  <>
+                    <MapPin size={16} className="text-indigo-500" /> Paróquia / Comunidade
+                  </>
+                }
+                value={form.parish}
+                error={errors.parish}
+                placeholder="Nome da Paróquia"
+                onChange={(value) => handleFieldChange("parish", value)}
+              />
             </div>
+
+            <FormField
+              id="emergency_contact"
+              as="textarea"
+              label={
+                <>
+                  <ShieldAlert size={16} className="text-red-500" /> Contato de Emergência (Opcional)
+                </>
+              }
+              value={form.emergency_contact}
+              error={errors.emergency_contact}
+              placeholder="Nome do contato + Telefone"
+              rows={2}
+              onChange={(value) => handleFieldChange("emergency_contact", value)}
+            />
 
             <div className="flex flex-col-reverse sm:flex-row justify-end gap-2.5 pt-4 border-t border-slate-100 shrink-0">
               <button

@@ -1,6 +1,6 @@
 import { User, IdCard, Phone, Mail, ArrowRight } from "lucide-react";
 import { maskCpf, maskPhone } from "../../../shared/masks/sharedMasks";
-import FormField from "../components/FormField";
+import FormField from "../../../shared/components/FormField";
 import type {RegisterForm, FormErrors} from "../types/participantsTypes";
 
 interface RegisterStepOneProps {
