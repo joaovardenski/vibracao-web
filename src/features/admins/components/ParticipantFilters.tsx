@@ -6,7 +6,7 @@ interface ParticipantsFiltersProps {
   onExport: () => void;
   exporting: boolean;
   exportError?: string | null;
-  onCreateParticipant: () => void;
+  onCreateClick: () => void;
 }
 
 export default function ParticipantsFilters({
@@ -15,7 +15,7 @@ export default function ParticipantsFilters({
   onExport,
   exporting,
   exportError,
-  onCreateParticipant,
+  onCreateClick,
 }: ParticipantsFiltersProps) {
   return (
     <div className="bg-white p-4 sm:p-6 rounded-2xl border border-slate-100 shadow-xs flex flex-col md:flex-row md:items-center justify-between gap-4">
@@ -35,7 +35,7 @@ export default function ParticipantsFilters({
 
       <div className="flex items-center gap-2">
         <button
-          onClick={onCreateParticipant}
+          onClick={onCreateClick}
           className="flex items-center gap-2 px-4 py-2 rounded-xl bg-indigo-600 text-white hover:bg-indigo-700 transition text-xs font-bold cursor-pointer"
         >
           <Plus size={16} />

@@ -97,14 +97,12 @@ export default function AdminPainelBase({ children }: AdminPainelBaseProps) {
           {/* Links de Navegação Modificados para a tag <Link> */}
           <nav className="flex flex-col gap-1">
             {menuItems.map((item, index) => {
-              // Verifica dinamicamente se a URL atual bate com o path do item
               const isActive = location.pathname === item.path;
 
               return (
                 <Link
                   key={index}
                   to={item.path}
-                  // Fecha a gaveta no mobile automaticamente ao clicar em um link
                   onClick={() => setIsSidebarOpen(false)}
                   className={`flex items-center gap-3 w-full px-4 py-3.5 text-sm font-semibold rounded-xl transition-all duration-200 ${
                     isActive

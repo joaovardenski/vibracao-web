@@ -10,15 +10,19 @@ import {
 import type { Registration } from "../types/adminTypes";
 
 interface ParticipantDrawerProps {
-  participant: Registration | null;
+  registration: Registration | null;
   onClose: () => void;
 }
 
-export default function ParticipantDrawer({
-  participant,
-  onClose,
-}: ParticipantDrawerProps) {
-  if (!participant) return null;
+export default function ParticipantDrawer({ registration, onClose }: ParticipantDrawerProps) {
+  if (!registration) return null;
+
+  const formattedAmount = new Intl.NumberFormat("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  }).format(Number(registration.amount));
+
+  const whatsappLink = `https://wa.me/55${registration.participant.phone.replace(/\D/g, "")}`;
 
   return (
     <>
@@ -37,18 +41,17 @@ export default function ParticipantDrawer({
 
               <div>
                 <h3 className="text-base font-black text-slate-800 leading-tight">
-                  {participant.participant.full_name}
+                  {registration.participant.full_name}
                 </h3>
-
                 <p className="text-xs font-mono text-gray-400 mt-0.5">
-                  {participant.ticket_number}
+                  {registration.ticket_number}
                 </p>
               </div>
             </div>
 
             <button
               onClick={onClose}
-              className="p-1.5 text-gray-400 hover:bg-slate-50 hover:text-gray-600 rounded-lg transition"
+              className="p-1.5 text-gray-400 hover:bg-slate-50 hover:text-gray-600 rounded-lg transition cursor-pointer"
             >
               <X size={18} />
             </button>
@@ -59,7 +62,6 @@ export default function ParticipantDrawer({
               <span className="text-xs font-bold text-gray-500 uppercase">
                 Situação
               </span>
-
               <span className="inline-flex items-center px-2.5 py-1 text-xs font-bold rounded-full border bg-emerald-50 text-emerald-700 border-emerald-100">
                 Aprovado
               </span>
@@ -73,13 +75,13 @@ export default function ParticipantDrawer({
               <InfoItem
                 icon={<CreditCard size={16} />}
                 label="CPF"
-                value={participant.participant.cpf}
+                value={registration.participant.cpf}
               />
 
               <InfoItem
                 icon={<Mail size={16} />}
                 label="E-mail"
-                value={participant.participant.email}
+                value={registration.participant.email}
               />
 
               <InfoItem
@@ -87,9 +89,9 @@ export default function ParticipantDrawer({
                 label="Cidade / Paróquia"
                 value={
                   <>
-                    <p>{participant.participant.city}</p>
+                    <p>{registration.participant.city}</p>
                     <p className="text-xs text-gray-500">
-                      {participant.participant.parish}
+                      {registration.participant.parish}
                     </p>
                   </>
                 }
@@ -100,25 +102,18 @@ export default function ParticipantDrawer({
               <h4 className="text-[11px] font-black uppercase tracking-wider text-red-500">
                 Contatos de Segurança
               </h4>
-
               <div className="bg-red-50/40 border border-red-100/60 p-3 rounded-xl text-xs text-gray-700">
-                {participant.participant.emergency_contact ||
-                  "Nenhum contato cadastrado."}
+                {registration.participant.emergency_contact || "Nenhum contato cadastrado."}
               </div>
             </div>
 
             <div className="space-y-3 pt-3 border-t border-slate-100 text-xs text-gray-400 flex items-center justify-between">
               <span className="flex items-center gap-1">
                 <Calendar size={14} />
-                Inscrito em: {participant.created_at}
+                Inscrito em: {registration.created_at}
               </span>
-
               <span className="font-bold text-gray-700">
-                Valor Pago:{" "}
-                {new Intl.NumberFormat("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                }).format(Number(participant.amount))}
+                Valor Pago: {formattedAmount}
               </span>
             </div>
           </div>
@@ -126,10 +121,10 @@ export default function ParticipantDrawer({
 
         <div className="pt-4 border-t border-slate-100">
           <a
-            href={`https://wa.me/55${participant.participant.phone.replace(/\D/g, "")}`}
+            href={whatsappLink}
             target="_blank"
             rel="noreferrer"
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 py-3 text-sm font-bold text-white"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 py-3 text-sm font-bold text-white text-center"
           >
             <Phone size={16} />
             Chamar no WhatsApp
@@ -152,10 +147,8 @@ function InfoItem({
   return (
     <div className="flex gap-3 text-sm text-gray-600">
       <div className="text-gray-400 shrink-0 mt-0.5">{icon}</div>
-
       <div>
         <p className="text-xs text-gray-400">{label}</p>
-
         <div className="font-semibold text-gray-800 break-all">{value}</div>
       </div>
     </div>

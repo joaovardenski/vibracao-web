@@ -21,11 +21,8 @@ export function useLoginForm() {
   const { loadUser } = useAuth();
 
   const [form, setForm] = useState<LoginForm>(INITIAL);
-
   const [errors, setErrors] = useState<LoginErrors>({});
-
   const [loading, setLoading] = useState(false);
-
   const [serverError, setServerError] = useState<string | null>(null);
 
   const updateField = (field: keyof LoginForm, value: string) => {

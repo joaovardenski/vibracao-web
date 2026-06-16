@@ -20,11 +20,8 @@ const INITIAL: RegisterForm = {
 
 export function useRegisterForm() {
   const [form, setForm] = useState<RegisterForm>(INITIAL);
-
   const [errors, setErrors] = useState<FormErrors>({});
-
   const [loading, setLoading] = useState(false);
-
   const [serverError, setServerError] = useState<string | null>(null);
 
   const updateField = (field: keyof RegisterForm, value: string) => {

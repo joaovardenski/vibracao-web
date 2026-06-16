@@ -11,7 +11,7 @@ export function useExportPdf() {
       setExporting(true);
       setError(null);
 
-      const response = await api.get("/admin/registrations/exportPdf", {
+      const response = await api.get("/admin/registrations/export-pdf", {
         responseType: "blob",
       });
 

@@ -2,18 +2,18 @@ import { useState, useEffect, useCallback } from "react";
 import api from "../../../services/api";
 
 interface Participant {
-  id: number;
+  id: string;
   full_name: string;
   city: string;
 }
 
 interface TicketLot {
-  id: number;
+  id: string;
   name: string;
 }
 
 export interface LatestRegistration {
-  id: number;
+  id: string;
   ticket_number: string;
   status: "approved" | "pending" | "expired" | "cancelled";
   amount: number;
@@ -50,7 +50,6 @@ export function useDashboard() {
     }
   }, []);
 
-  // Inicialização — lógica inline para o ESLint não reclamar
   useEffect(() => {
     async function init() {
       setLoading(true);
