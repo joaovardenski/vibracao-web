@@ -28,13 +28,16 @@ export default function PaymentReturn() {
   const showSummary = details && status !== "failure";
 
   return (
-    <div className={`min-h-screen bg-linear-to-b ${bgGradient} flex items-center justify-center sm:py-12`}>
+    <div
+      className={`min-h-screen bg-linear-to-b ${bgGradient} flex items-center justify-center sm:py-12`}
+    >
       <div className="w-full max-w-md bg-white sm:rounded-2xl sm:shadow-xl sm:border sm:border-gray-100 min-h-screen sm:min-h-auto flex flex-col justify-between p-6 sm:justify-center">
-        
         {/* Conteúdo Principal */}
         <div className="my-auto sm:my-0">
           <div className="text-center mb-6">
-            <div className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 ${iconClass}`}>
+            <div
+              className={`w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-4 ${iconClass}`}
+            >
               <StatusIcon size={40} />
             </div>
             <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight px-2">
@@ -49,12 +52,11 @@ export default function PaymentReturn() {
         </div>
 
         {/* Grupo de Botões de Ação */}
-        <PaymentActions 
-          status={status} 
-          buttonClass={buttonClass} 
-          onRefresh={refresh} 
+        <PaymentActions
+          status={status}
+          buttonClass={buttonClass}
+          onRefresh={refresh}
         />
-        
       </div>
     </div>
   );

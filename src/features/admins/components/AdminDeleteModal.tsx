@@ -16,7 +16,11 @@ function getErrorMessage(error: unknown, fallback: string): string {
   return fallback;
 }
 
-export default function AdminDeleteModal({ adminId, onClose, onSuccess }: AdminDeleteModalProps) {
+export default function AdminDeleteModal({
+  adminId,
+  onClose,
+  onSuccess,
+}: AdminDeleteModalProps) {
   const [deleteLoading, setDeleteLoading] = useState(false);
 
   if (!adminId) return null;
@@ -28,7 +32,10 @@ export default function AdminDeleteModal({ adminId, onClose, onSuccess }: AdminD
       onSuccess();
       onClose();
     } catch (error: unknown) {
-      const errorMsg = getErrorMessage(error, "Não foi possível remover este administrador.");
+      const errorMsg = getErrorMessage(
+        error,
+        "Não foi possível remover este administrador.",
+      );
       alert(errorMsg);
     } finally {
       setDeleteLoading(false);
@@ -44,7 +51,9 @@ export default function AdminDeleteModal({ adminId, onClose, onSuccess }: AdminD
             <AlertTriangle size={24} />
           </div>
           <div>
-            <h4 className="text-base font-black text-gray-800">Excluir Administrador?</h4>
+            <h4 className="text-base font-black text-gray-800">
+              Excluir Administrador?
+            </h4>
             <p className="text-xs text-gray-400 mt-1.5 leading-relaxed">
               Essa ação é irreversível e removerá o acesso dele imediatamente.
             </p>
@@ -62,7 +71,11 @@ export default function AdminDeleteModal({ adminId, onClose, onSuccess }: AdminD
               onClick={handleDelete}
               className="flex-1 py-3 bg-red-500 text-xs font-bold text-white rounded-xl hover:bg-red-600 transition flex items-center justify-center cursor-pointer"
             >
-              {deleteLoading ? <Loader2 size={14} className="animate-spin" /> : "Sim, Excluir"}
+              {deleteLoading ? (
+                <Loader2 size={14} className="animate-spin" />
+              ) : (
+                "Sim, Excluir"
+              )}
             </button>
           </div>
         </div>

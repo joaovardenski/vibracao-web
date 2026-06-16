@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { X, User, ShieldAlert, Smartphone, Mail, MapPin, Loader2 } from "lucide-react";
+import {
+  X,
+  User,
+  ShieldAlert,
+  Smartphone,
+  Mail,
+  MapPin,
+  Loader2,
+} from "lucide-react";
 import { isAxiosError } from "axios";
 import api from "../../../services/api";
 import { maskCpf, maskPhone } from "../../../shared/masks/sharedMasks";
@@ -23,13 +31,20 @@ const INITIAL_FORM_STATE = {
   emergency_contact: "",
 };
 
-export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: ParticipantFormModalProps) {
+export default function ParticipantFormModal({
+  isOpen,
+  onClose,
+  onSuccess,
+}: ParticipantFormModalProps) {
   const [loading, setLoading] = useState(false);
   const [form, setForm] = useState(INITIAL_FORM_STATE);
   const [errors, setErrors] = useState<Partial<ManualRegistrationErrors>>({});
   const [serverError, setServerError] = useState("");
 
-  const handleFieldChange = (field: keyof typeof INITIAL_FORM_STATE, value: string) => {
+  const handleFieldChange = (
+    field: keyof typeof INITIAL_FORM_STATE,
+    value: string,
+  ) => {
     setForm((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
       setErrors((prev) => ({ ...prev, [field]: undefined }));
@@ -51,7 +66,7 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
     try {
       setLoading(true);
       await api.post("/admin/registrations", form);
-      
+
       setForm(INITIAL_FORM_STATE);
       onSuccess();
       onClose();
@@ -59,7 +74,9 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
       console.error(error);
 
       if (
-        isAxiosError<{ errors?: Record<string, string[]>; message?: string }>(error) &&
+        isAxiosError<{ errors?: Record<string, string[]>; message?: string }>(
+          error,
+        ) &&
         error.response?.status === 422 &&
         error.response?.data?.errors
       ) {
@@ -67,7 +84,8 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
         const formattedErrors: Partial<ManualRegistrationErrors> = {};
 
         Object.keys(backendErrors).forEach((field) => {
-          formattedErrors[field as keyof ManualRegistrationErrors] = backendErrors[field][0];
+          formattedErrors[field as keyof ManualRegistrationErrors] =
+            backendErrors[field][0];
         });
 
         setErrors(formattedErrors);
@@ -95,7 +113,6 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
 
       <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 md:p-6 overflow-hidden">
         <div className="bg-white w-full max-w-2xl rounded-t-3xl sm:rounded-2xl shadow-2xl border border-slate-100 flex flex-col max-h-screen sm:max-h-[90vh] transition-all duration-300 transform animate-in fade-in slide-in-from-bottom-8 sm:slide-in-from-bottom-0">
-          
           <div className="flex items-center justify-between p-5 sm:p-6 border-b border-slate-100 shrink-0">
             <div>
               <h2 className="text-base sm:text-lg font-black text-slate-800 tracking-tight">
@@ -121,7 +138,9 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
           >
             {serverError && (
               <div className="rounded-xl border border-red-200 bg-red-50 p-4">
-                <p className="text-sm font-medium text-red-700">{serverError}</p>
+                <p className="text-sm font-medium text-red-700">
+                  {serverError}
+                </p>
               </div>
             )}
 
@@ -159,13 +178,16 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
                 inputMode="numeric"
                 label={
                   <>
-                    <Smartphone size={16} className="text-indigo-500" /> Celular / WhatsApp
+                    <Smartphone size={16} className="text-indigo-500" /> Celular
+                    / WhatsApp
                   </>
                 }
                 value={form.phone}
                 error={errors.phone}
                 placeholder="(00) 00000-0000"
-                onChange={(value) => handleFieldChange("phone", maskPhone(value))}
+                onChange={(value) =>
+                  handleFieldChange("phone", maskPhone(value))
+                }
               />
             </div>
 
@@ -175,7 +197,8 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
               inputMode="email"
               label={
                 <>
-                  <Mail size={16} className="text-indigo-500" /> Endereço de E-mail
+                  <Mail size={16} className="text-indigo-500" /> Endereço de
+                  E-mail
                 </>
               }
               value={form.email}
@@ -202,7 +225,8 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
                 id="parish"
                 label={
                   <>
-                    <MapPin size={16} className="text-indigo-500" /> Paróquia / Comunidade
+                    <MapPin size={16} className="text-indigo-500" /> Paróquia /
+                    Comunidade
                   </>
                 }
                 value={form.parish}
@@ -217,14 +241,17 @@ export default function ParticipantFormModal({ isOpen, onClose, onSuccess }: Par
               as="textarea"
               label={
                 <>
-                  <ShieldAlert size={16} className="text-red-500" /> Contato de Emergência (Opcional)
+                  <ShieldAlert size={16} className="text-red-500" /> Contato de
+                  Emergência (Opcional)
                 </>
               }
               value={form.emergency_contact}
               error={errors.emergency_contact}
               placeholder="Nome do contato + Telefone"
               rows={2}
-              onChange={(value) => handleFieldChange("emergency_contact", value)}
+              onChange={(value) =>
+                handleFieldChange("emergency_contact", value)
+              }
             />
 
             <div className="flex flex-col-reverse sm:flex-row justify-end gap-2.5 pt-4 border-t border-slate-100 shrink-0">

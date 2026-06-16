@@ -6,7 +6,10 @@ interface ParticipantMobileListProps {
   onSelect: (registration: Registration) => void;
 }
 
-export default function ParticipantMobileList({ registrations, onSelect }: ParticipantMobileListProps) {
+export default function ParticipantMobileList({
+  registrations,
+  onSelect,
+}: ParticipantMobileListProps) {
   return (
     <div className="block md:hidden divide-y divide-slate-100">
       {registrations.map((registration) => (

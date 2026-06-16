@@ -15,7 +15,12 @@ interface LoginFormFieldsProps {
   updateField: (field: "email" | "password", value: string) => void;
 }
 
-export default function LoginFormFields({ form, errors, loading, updateField }: LoginFormFieldsProps) {
+export default function LoginFormFields({
+  form,
+  errors,
+  loading,
+  updateField,
+}: LoginFormFieldsProps) {
   return (
     <div className="flex flex-col gap-5">
       <FormField

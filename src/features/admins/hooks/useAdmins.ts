@@ -47,7 +47,8 @@ export function useAdmins() {
           });
         }
       } catch (error) {
-        if (!cancelled) console.error("Erro ao carregar administradores", error);
+        if (!cancelled)
+          console.error("Erro ao carregar administradores", error);
       } finally {
         if (!cancelled) setLoading(false);
       }

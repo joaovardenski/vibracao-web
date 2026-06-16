@@ -15,7 +15,8 @@ import ParticipantFormModal from "../components/ParticipantFormModal";
 export default function Participants() {
   const [search, setSearch] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [selectedRegistration, setSelectedRegistration] = useState<Registration | null>(null);
+  const [selectedRegistration, setSelectedRegistration] =
+    useState<Registration | null>(null);
   const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   const { registrations, loading, error, pagination } = useRegistrations(
@@ -26,13 +27,12 @@ export default function Participants() {
   const { exportPdf, exporting, error: exportError } = useExportPdf();
 
   const handleRefreshData = () => {
-    window.location.reload(); 
+    window.location.reload();
   };
 
   return (
     <AdminPainelBase>
       <div className="space-y-6 relative">
-        
         {/* BLOCO DE FILTROS E BUSCA */}
         <ParticipantFilters
           search={search}
@@ -48,7 +48,6 @@ export default function Participants() {
 
         {/* LISTAGEM PRINCIPAL */}
         <div className="bg-white rounded-2xl border border-slate-100 shadow-xs overflow-hidden">
-          
           {/* Estados Auxiliares de Interface */}
           {loading && (
             <div className="p-10 text-center text-sm text-gray-400">
@@ -69,13 +68,13 @@ export default function Participants() {
           {/* Listagens Renderizadas Condicionalmente */}
           {!loading && !error && registrations.length > 0 && (
             <>
-              <ParticipantTable 
-                registrations={registrations} 
-                onSelect={setSelectedRegistration} 
+              <ParticipantTable
+                registrations={registrations}
+                onSelect={setSelectedRegistration}
               />
-              <ParticipantMobileList 
-                registrations={registrations} 
-                onSelect={setSelectedRegistration} 
+              <ParticipantMobileList
+                registrations={registrations}
+                onSelect={setSelectedRegistration}
               />
             </>
           )}

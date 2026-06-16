@@ -8,7 +8,11 @@ interface PaymentActionsProps {
   onRefresh: () => void;
 }
 
-export default function PaymentActions({ status, buttonClass, onRefresh }: PaymentActionsProps) {
+export default function PaymentActions({
+  status,
+  buttonClass,
+  onRefresh,
+}: PaymentActionsProps) {
   const isApproved = status === "approved";
 
   return (

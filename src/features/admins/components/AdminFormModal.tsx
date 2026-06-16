@@ -19,7 +19,12 @@ function getErrorMessage(error: unknown, fallback: string): string {
   return fallback;
 }
 
-export default function AdminFormModal({ isOpen, adminToEdit, onClose, onSuccess }: AdminFormModalProps) {
+export default function AdminFormModal({
+  isOpen,
+  adminToEdit,
+  onClose,
+  onSuccess,
+}: AdminFormModalProps) {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [form, setForm] = useState({
     name: adminToEdit?.name ?? "",
@@ -58,7 +63,9 @@ export default function AdminFormModal({ isOpen, adminToEdit, onClose, onSuccess
         <div className="bg-white w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl shadow-xl flex flex-col animate-in fade-in slide-in-from-bottom-8 duration-250">
           <div className="flex items-center justify-between p-5 border-b border-slate-100">
             <h3 className="text-sm font-black text-slate-800 uppercase tracking-wider">
-              {adminToEdit ? "Alterar Administrador" : "Cadastrar Administrador"}
+              {adminToEdit
+                ? "Alterar Administrador"
+                : "Cadastrar Administrador"}
             </h3>
             <button
               onClick={onClose}
@@ -107,7 +114,11 @@ export default function AdminFormModal({ isOpen, adminToEdit, onClose, onSuccess
                 </>
               }
               value={form.password}
-              placeholder={adminToEdit ? "Deixe em branco para não alterar" : "Mínimo 8 caracteres"}
+              placeholder={
+                adminToEdit
+                  ? "Deixe em branco para não alterar"
+                  : "Mínimo 8 caracteres"
+              }
               onChange={(value) => setForm({ ...form, password: value })}
             />
 
@@ -125,7 +136,11 @@ export default function AdminFormModal({ isOpen, adminToEdit, onClose, onSuccess
                 disabled={submitLoading}
                 className="flex-1 py-3 bg-indigo-600 text-xs font-bold text-white rounded-xl hover:bg-indigo-700 transition flex items-center justify-center gap-1.5 cursor-pointer"
               >
-                {submitLoading ? <Loader2 size={14} className="animate-spin" /> : "Salvar Alterações"}
+                {submitLoading ? (
+                  <Loader2 size={14} className="animate-spin" />
+                ) : (
+                  "Salvar Alterações"
+                )}
               </button>
             </div>
           </form>

@@ -27,7 +27,9 @@ export default function Dashboard() {
             <XCircle size={32} />
           </div>
           <div className="text-center">
-            <h3 className="text-sm font-bold text-slate-800">Erro ao carregar dados</h3>
+            <h3 className="text-sm font-bold text-slate-800">
+              Erro ao carregar dados
+            </h3>
             <p className="text-xs text-gray-400 mt-1">{error}</p>
           </div>
           <button
@@ -47,18 +49,16 @@ export default function Dashboard() {
   return (
     <AdminPainelBase>
       <div className="space-y-6">
-        <DashboardOverviewCards 
-          stats={stats} 
-          totalSpots={totalSpots} 
-          filledSpots={filledSpots} 
+        <DashboardOverviewCards
+          stats={stats}
+          totalSpots={totalSpots}
+          filledSpots={filledSpots}
         />
 
-        <DashboardProgressBar 
-          filledPercentage={filledPercentage} 
-        />
+        <DashboardProgressBar filledPercentage={filledPercentage} />
 
-        <DashboardLatestRegistrations 
-          registrations={stats.latest_registrations} 
+        <DashboardLatestRegistrations
+          registrations={stats.latest_registrations}
         />
       </div>
     </AdminPainelBase>

@@ -3,7 +3,11 @@ import axios from "axios";
 
 import api from "../../../services/api";
 
-import type { FormErrors, RegisterForm, RegistrationResponse } from "../types/participantsTypes";
+import type {
+  FormErrors,
+  RegisterForm,
+  RegistrationResponse,
+} from "../types/participantsTypes";
 
 import { sanitizeRegisterForm } from "../../../shared/sanitizers/sharedSanitizers";
 import { validateRegisterForm } from "../../../shared/validators/sharedValidators";
@@ -69,7 +73,7 @@ export function useRegisterForm() {
 
       if (orderId) {
         const paymentUrl = `/payment?external_reference=${orderId}`;
-        
+
         window.history.pushState(null, "", paymentUrl);
       }
 

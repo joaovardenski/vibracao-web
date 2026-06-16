@@ -15,7 +15,10 @@ interface ParticipantDrawerProps {
   onClose: () => void;
 }
 
-export default function ParticipantDrawer({ registration, onClose }: ParticipantDrawerProps) {
+export default function ParticipantDrawer({
+  registration,
+  onClose,
+}: ParticipantDrawerProps) {
   if (!registration) return null;
 
   const formattedAmount = new Intl.NumberFormat("pt-BR", {
@@ -104,7 +107,8 @@ export default function ParticipantDrawer({ registration, onClose }: Participant
                 Contatos de Segurança
               </h4>
               <div className="bg-red-50/40 border border-red-100/60 p-3 rounded-xl text-xs text-gray-700">
-                {registration.participant.emergency_contact || "Nenhum contato cadastrado."}
+                {registration.participant.emergency_contact ||
+                  "Nenhum contato cadastrado."}
               </div>
             </div>
 

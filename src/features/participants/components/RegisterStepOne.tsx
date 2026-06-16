@@ -1,15 +1,12 @@
 import { User, IdCard, Phone, Mail, ArrowRight } from "lucide-react";
 import { maskCpf, maskPhone } from "../../../shared/masks/sharedMasks";
 import FormField from "../../../shared/components/FormField";
-import type {RegisterForm, FormErrors} from "../types/participantsTypes";
+import type { RegisterForm, FormErrors } from "../types/participantsTypes";
 
 interface RegisterStepOneProps {
   form: RegisterForm;
   errors: FormErrors;
-  updateField: (
-    field: keyof RegisterForm,
-    value: string
-  ) => void;
+  updateField: (field: keyof RegisterForm, value: string) => void;
   canAdvance: boolean;
   onNextStep: () => void;
 }
@@ -60,7 +57,8 @@ export default function RegisterStepOne({
           id="phone"
           label={
             <span className="flex items-center gap-2">
-              <Phone size={16} className="text-indigo-500" /> Telefone / WhatsApp
+              <Phone size={16} className="text-indigo-500" /> Telefone /
+              WhatsApp
             </span>
           }
           value={form.phone}

@@ -6,7 +6,10 @@ interface ParticipantTableProps {
   onSelect: (registration: Registration) => void;
 }
 
-export default function ParticipantTable({ registrations, onSelect }: ParticipantTableProps) {
+export default function ParticipantTable({
+  registrations,
+  onSelect,
+}: ParticipantTableProps) {
   return (
     <div className="hidden md:block overflow-x-auto">
       <table className="w-full text-left border-collapse">

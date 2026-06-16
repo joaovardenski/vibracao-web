@@ -1,4 +1,8 @@
-import type { ChangeEvent, InputHTMLAttributes, TextareaHTMLAttributes } from "react";
+import type {
+  ChangeEvent,
+  InputHTMLAttributes,
+  TextareaHTMLAttributes,
+} from "react";
 
 type BaseProps = {
   id: string;
@@ -11,7 +15,7 @@ type BaseProps = {
 };
 
 // Combina os atributos nativos dependendo do tipo de tag escolhida
-type FormFieldProps = BaseProps & 
+type FormFieldProps = BaseProps &
   Omit<InputHTMLAttributes<HTMLInputElement>, "onChange" | "value"> &
   Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "onChange" | "value">;
 
@@ -26,8 +30,9 @@ export default function FormField({
   className = "",
   ...props
 }: FormFieldProps) {
-  
-  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     const rawValue = e.target.value;
     onChange(transform ? transform(rawValue) : rawValue);
   };

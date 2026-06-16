@@ -5,12 +5,12 @@ import type {
   LoginForm,
 } from "../../features/auth/types/authTypes";
 import type {
-    FormErrors,
-    RegisterForm,
+  FormErrors,
+  RegisterForm,
 } from "../../features/participants/types/participantsTypes";
 import type {
-    ManualRegistrationErrors,
-    ManualRegistrationForm,
+  ManualRegistrationErrors,
+  ManualRegistrationForm,
 } from "../../features/admins/types/adminTypes";
 import { onlyDigits } from "../../shared/masks/sharedMasks";
 

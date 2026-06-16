@@ -1,15 +1,12 @@
 import { MapPin, Church, HeartHandshake, ArrowLeft } from "lucide-react";
 import FormField from "../../../shared/components/FormField";
 import LoadingSpinner from "../../../shared/components/LoadingSpiner";
-import type {RegisterForm, FormErrors} from "../types/participantsTypes";
+import type { RegisterForm, FormErrors } from "../types/participantsTypes";
 
 interface RegisterStepTwoProps {
   form: RegisterForm;
   errors: FormErrors;
-  updateField: (
-    field: keyof RegisterForm,
-    value: string
-  ) => void;
+  updateField: (field: keyof RegisterForm, value: string) => void;
   loading: boolean;
   onPrevStep: () => void;
 }
@@ -54,7 +51,8 @@ export default function RegisterStepTwo({
           id="parish"
           label={
             <span className="flex items-center gap-2">
-              <Church size={16} className="text-indigo-500" /> Paróquia / Comunidade
+              <Church size={16} className="text-indigo-500" /> Paróquia /
+              Comunidade
             </span>
           }
           value={form.parish}
@@ -68,7 +66,8 @@ export default function RegisterStepTwo({
         id="emergency_contact"
         label={
           <span className="flex items-center gap-2">
-            <HeartHandshake size={16} className="text-indigo-500" /> Contato de emergência (Opcional)
+            <HeartHandshake size={16} className="text-indigo-500" /> Contato de
+            emergência (Opcional)
           </span>
         }
         value={form.emergency_contact ?? ""}

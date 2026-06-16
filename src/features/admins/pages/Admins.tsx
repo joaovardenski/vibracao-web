@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Search, UserPlus, Edit2, Trash2, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
+import {
+  Search,
+  UserPlus,
+  Edit2,
+  Trash2,
+  ChevronLeft,
+  ChevronRight,
+  Loader2,
+} from "lucide-react";
 import AdminPainelBase from "../../../layouts/AdminPainelBase";
 import { useAdmins, type AdminUser } from "../hooks/useAdmins";
 
@@ -82,16 +90,23 @@ export default function Admins() {
                   </thead>
                   <tbody className="divide-y divide-slate-50 text-sm">
                     {admins.map((admin) => (
-                      <tr key={admin.id} className="hover:bg-slate-50/40 transition">
+                      <tr
+                        key={admin.id}
+                        className="hover:bg-slate-50/40 transition"
+                      >
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
                             <div className="h-8 w-8 bg-indigo-50 text-indigo-600 font-bold rounded-full flex items-center justify-center text-xs">
                               {admin.name.charAt(0).toUpperCase()}
                             </div>
-                            <span className="font-bold text-gray-800">{admin.name}</span>
+                            <span className="font-bold text-gray-800">
+                              {admin.name}
+                            </span>
                           </div>
                         </td>
-                        <td className="py-4 px-6 font-medium text-gray-500">{admin.email}</td>
+                        <td className="py-4 px-6 font-medium text-gray-500">
+                          {admin.email}
+                        </td>
                         <td className="py-4 px-6 text-right space-x-1">
                           <button
                             onClick={() => handleOpenEdit(admin)}
@@ -115,10 +130,17 @@ export default function Admins() {
               {/* Mobile View */}
               <div className="block md:hidden divide-y divide-slate-100">
                 {admins.map((admin) => (
-                  <div key={admin.id} className="p-4 flex items-center justify-between gap-2">
+                  <div
+                    key={admin.id}
+                    className="p-4 flex items-center justify-between gap-2"
+                  >
                     <div className="min-w-0">
-                      <p className="text-sm font-bold text-gray-800 truncate">{admin.name}</p>
-                      <p className="text-xs text-gray-400 truncate mt-0.5">{admin.email}</p>
+                      <p className="text-sm font-bold text-gray-800 truncate">
+                        {admin.name}
+                      </p>
+                      <p className="text-xs text-gray-400 truncate mt-0.5">
+                        {admin.email}
+                      </p>
                     </div>
                     <div className="flex gap-1 shrink-0">
                       <button

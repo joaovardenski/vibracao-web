@@ -2,13 +2,19 @@ interface ProgressBarProps {
   filledPercentage: number;
 }
 
-export default function DashboardProgressBar({ filledPercentage }: ProgressBarProps) {
+export default function DashboardProgressBar({
+  filledPercentage,
+}: ProgressBarProps) {
   return (
     <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-xs">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
         <div>
-          <h4 className="text-sm font-bold text-slate-800">Ocupação do Evento</h4>
-          <p className="text-xs text-gray-400">Percentual de vagas preenchidas no lote atual</p>
+          <h4 className="text-sm font-bold text-slate-800">
+            Ocupação do Evento
+          </h4>
+          <p className="text-xs text-gray-400">
+            Percentual de vagas preenchidas no lote atual
+          </p>
         </div>
         <span className="text-sm font-black text-indigo-600 bg-indigo-50 px-3 py-1 rounded-lg self-start sm:self-auto">
           {filledPercentage.toFixed(1)}% preenchido

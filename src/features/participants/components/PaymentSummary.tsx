@@ -13,7 +13,10 @@ interface PaymentSummaryProps {
   status: "approved" | "pending" | "failure";
 }
 
-export default function PaymentSummary({ details, status }: PaymentSummaryProps) {
+export default function PaymentSummary({
+  details,
+  status,
+}: PaymentSummaryProps) {
   const formatCurrency = (value: number) => {
     return value.toLocaleString("pt-BR", {
       style: "currency",
@@ -38,9 +41,7 @@ export default function PaymentSummary({ details, status }: PaymentSummaryProps)
         </div>
 
         <div className="flex justify-between items-center gap-4">
-          <span className="text-gray-500 text-xs sm:text-sm">
-            E-mail
-          </span>
+          <span className="text-gray-500 text-xs sm:text-sm">E-mail</span>
           <span className="font-medium text-gray-700 text-right truncate max-w-45 sm:max-w-none">
             {details.participant.email}
           </span>
@@ -65,7 +66,9 @@ export default function PaymentSummary({ details, status }: PaymentSummaryProps)
         <div className="h-px w-full border-t border-dashed border-gray-200 my-1" />
 
         <div className="flex justify-between items-center pt-1">
-          <span className="font-bold text-gray-900">{status === "approved" ? "Total pago" : "Valor da transação"}</span>
+          <span className="font-bold text-gray-900">
+            {status === "approved" ? "Total pago" : "Valor da transação"}
+          </span>
           <span className="text-lg font-black text-gray-900">
             {formatCurrency(details.ticket.amount)}
           </span>
