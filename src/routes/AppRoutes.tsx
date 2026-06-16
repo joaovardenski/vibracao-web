@@ -1,5 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 
+import Home from "../features/landing/pages/Home";
+
 import Register from "../features/participants/pages/Register";
 import PaymentReturn from "../features/participants/pages/PaymentReturn";
 
@@ -15,6 +17,7 @@ export default function AppRoutes() {
   return (
     <Routes>
       {/* Públicas */}
+      <Route path="/home" element={<Home />} />
       <Route path="/" element={<Register />} />
       <Route path="/payment" element={<PaymentReturn />} />
       <Route path="/login" element={<Login />} />
